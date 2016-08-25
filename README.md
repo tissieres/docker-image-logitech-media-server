@@ -13,6 +13,7 @@ Run Directly:
                -p 9090:9090 \
                -p 3483:3483 \
                -p 3483:3483/udp \
+               -v /etc/localtime:/etc/localtime:ro \
                -v <local-state-dir>:/srv/squeezebox \
                -v <audio-dir>:/srv/music \
                apnar/logitech-media-server
