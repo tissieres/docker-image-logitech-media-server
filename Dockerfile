@@ -15,6 +15,7 @@ RUN buildDeps='build-essential libssl-dev libffi-dev python-pip python-dev' && \
 	MEDIASERVER_URL="${BASESERVER_URL}${RELEASE}${MEDIAFILE}" && \
 	curl -Lsf -o /tmp/logitechmediaserver.deb $MEDIASERVER_URL && \
 	dpkg -i /tmp/logitechmediaserver.deb && \
+	rm -rf /usr/share/squeezeboxserver/CPAN/Font && \
 	rm -f /tmp/logitechmediaserver.deb && \
 	pip install --upgrade pip && \
 	pip install gmusicapi==10.0.1 && \
