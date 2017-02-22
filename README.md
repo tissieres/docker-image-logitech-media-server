@@ -7,7 +7,7 @@ Google Music plugin as well as a bump in ubuntu and Squeezebox Server
 versions.
 
 Run Directly:
-
+```
     docker run -d \
                --name lms \
                -p 9000:9000 \
@@ -18,7 +18,7 @@ Run Directly:
                -v <local-state-dir>:/srv/squeezebox \
                -v <audio-dir>:/srv/music \
                apnar/logitech-media-server
-
+```
 To enable Google Music plugin follow directions here:
 
 https://squeezebox-googlemusic.github.io/squeezebox-googlemusic/
