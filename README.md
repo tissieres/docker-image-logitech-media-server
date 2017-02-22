@@ -25,7 +25,7 @@ https://squeezebox-googlemusic.github.io/squeezebox-googlemusic/
 
 You can skip straight to step 6 of the installation instructions then read the section on usage.
 
-Note:
+## Note:
 
 If you get the Google Music Plugin seemingly working but get no sound you're likely running
 into this bug:
@@ -33,6 +33,7 @@ into this bug:
   https://github.com/squeezebox-googlemusic/squeezebox-googlemusic/issues/14
 
 You can fix it by running:
-
+```
   docker exec -it lms sed -i 's/::Protocols::HTTP/::Protocols::HTTPS/' /srv/squeezebox/cache/InstalledPlugins/Plugins/GoogleMusic/ProtocolHandler.pm
   docker restart lms
+```
