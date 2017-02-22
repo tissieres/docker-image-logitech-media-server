@@ -8,16 +8,16 @@ versions.
 
 Run Directly:
 ```
-    docker run -d \
-               --name lms \
-               -p 9000:9000 \
-               -p 9090:9090 \
-               -p 3483:3483 \
-               -p 3483:3483/udp \
-               -v /etc/localtime:/etc/localtime:ro \
-               -v <local-state-dir>:/srv/squeezebox \
-               -v <audio-dir>:/srv/music \
-               apnar/logitech-media-server
+docker run -d \
+           --name lms \
+           -p 9000:9000 \
+           -p 9090:9090 \
+           -p 3483:3483 \
+           -p 3483:3483/udp \
+           -v /etc/localtime:/etc/localtime:ro \
+           -v <local-state-dir>:/srv/squeezebox \
+           -v <audio-dir>:/srv/music \
+           apnar/logitech-media-server
 ```
 To enable Google Music plugin follow directions here:
 
@@ -34,6 +34,6 @@ into this bug:
 
 You can fix it by running:
 ```
-  docker exec -it lms sed -i 's/::Protocols::HTTP/::Protocols::HTTPS/' /srv/squeezebox/cache/InstalledPlugins/Plugins/GoogleMusic/ProtocolHandler.pm
-  docker restart lms
+docker exec -it lms sed -i 's/::Protocols::HTTP/::Protocols::HTTPS/' /srv/squeezebox/cache/InstalledPlugins/Plugins/GoogleMusic/ProtocolHandler.pm
+docker restart lms
 ```
