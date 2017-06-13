@@ -1,5 +1,5 @@
 FROM ubuntu:xenial
-MAINTAINER Zach Brown <github@prozach.org>
+MAINTAINER Josh Lukens <jlukens@botch.com>
 
 ENV SQUEEZE_VOL /srv/squeezebox
 ENV LANG C.UTF-8
