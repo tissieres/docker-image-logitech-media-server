@@ -18,6 +18,7 @@ RUN buildDeps='build-essential libssl-dev libffi-dev python-pip python-dev' && \
 	rm -rf /usr/share/squeezeboxserver/CPAN/Font && \
 	rm -f /tmp/logitechmediaserver.deb && \
 	pip install --upgrade pip && \
+        hash -r pip && \
 	pip install gmusicapi==10.0.1 && \
 	cpan App::cpanminus && \
 	cpanm --notest Inline && \
