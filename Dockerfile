@@ -4,7 +4,7 @@ MAINTAINER Josh Lukens <jlukens@botch.com>
 ENV SQUEEZE_VOL /srv/squeezebox
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
-ENV BASESERVER_URL=http://downloads.slimdevices.com/nightly/7.9/sc/
+ENV BASESERVER_URL=http://downloads.slimdevices.com/nightly/8.0/lms/
 ENV PERL_MM_USE_DEFAULT 1
 
 RUN buildDeps='build-essential libssl-dev libffi-dev python-pip python-dev' && \
@@ -13,16 +13,18 @@ RUN buildDeps='build-essential libssl-dev libffi-dev python-pip python-dev' && \
 	RELEASE=`curl -Lsf -o - "${BASESERVER_URL}?C=M;O=A" | grep DIR | sed -e '$!d' -e 's/.*href="//' -e 's/".*//'` && \
 	MEDIAFILE=`curl -Lsf -o - "${BASESERVER_URL}${RELEASE}" | grep _amd64.deb | sed -e '$!d' -e 's/.*href="//' -e 's/".*//'` && \
 	MEDIASERVER_URL="${BASESERVER_URL}${RELEASE}${MEDIAFILE}" && \
+        echo Downloading ${MEDIASERVER_URL} && \
 	curl -Lsf -o /tmp/logitechmediaserver.deb $MEDIASERVER_URL && \
 	dpkg -i /tmp/logitechmediaserver.deb && \
 	rm -rf /usr/share/squeezeboxserver/CPAN/Font && \
 	rm -f /tmp/logitechmediaserver.deb && \
 	pip install --upgrade pip && \
         hash -r pip && \
-	pip install gmusicapi==10.0.1 && \
+	pip install gmusicapi==12.1.0 && \
 	cpan App::cpanminus && \
 	cpanm --notest Inline && \
 	cpanm --notest Inline::Python && \
+	cpanm --notest IO::Socket::SSL && \
 	apt-get purge -y --auto-remove $buildDeps && \
 	apt-get clean && \
         rm -rf /var/lib/apt/lists/* && \

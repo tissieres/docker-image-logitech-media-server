@@ -21,19 +21,21 @@ docker run -d \
 ```
 To enable Google Music plugin follow directions here:
 
-https://squeezebox-googlemusic.github.io/squeezebox-googlemusic/
+https://github.com/squeezebox-googlemusic/squeezebox-googlemusic#installation
 
-You can skip straight to step 6 of the installation instructions then read the section on usage.
+You can skip straight to step 7 of the installation instructions then read the section on usage.
 
 ## Note:
 
-If you get the Google Music Plugin seemingly working but get no sound you're likely running
-into this bug:
+Recently bumped LMS version to the 8.0 line. See the following from the LMS git page:
+https://github.com/Logitech/slimserver#sb-radio-and-logitech-media-server-8
 
-  https://github.com/squeezebox-googlemusic/squeezebox-googlemusic/issues/14
+## SB Radio and Logitech Media Server 8+
 
-You can fix it by running:
-```
-docker exec -it lms sed -i 's/::Protocols::HTTP/::Protocols::HTTPS/' /srv/squeezebox/cache/InstalledPlugins/Plugins/GoogleMusic/ProtocolHandler.pm
-docker restart lms
-```
+Unfortunately the latest Squeezebox Radio firmware (7.7.3) comes with a bug which prevents it from connecting correctly to Logitech Media Server 8+. It's version string comparison function fails to recognize 8.0.0 as more recent than 7.7.3. While the bug has been fixed years ago, the fixed firmware never got released. Unfortunately we're at this point not able to build a fixed firmware for distribution.
+
+But there's a patch available, which you can easily install on an existing SB Radio:
+
+* On the Radio go to Settings/Advanced/Applet Installer, install the Patch Installer. The Radio will re-boot.
+* Once it's back, go to Settings/Advanced/Patch Installer and install the "Version Comparison Fix".
+
