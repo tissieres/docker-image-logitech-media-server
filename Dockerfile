@@ -7,9 +7,12 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV BASESERVER_URL=http://downloads.slimdevices.com/nightly/8.0/lms/
 ENV PERL_MM_USE_DEFAULT 1
 
-RUN buildDeps='build-essential libssl-dev libffi-dev python-pip python-dev' && \
+RUN buildDeps='build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev python-pip python-dev' && \
         apt-get update && \
-	apt-get -y install sudo curl wget faad flac lame sox libio-socket-ssl-perl libpython2.7 libfreetype6 libfont-freetype-perl $buildDeps && \
+	apt-get -y install sudo curl wget faad flac lame sox libio-socket-ssl-perl libpython2.7 libfreetype6 \
+             libfont-freetype-perl libcrypt-openssl-rsa-perl libio-socket-inet6-perl libwww-perl \
+             libcrypt-openssl-bignum-perl libcrypt-openssl-random-perl libcrypt-ssleay-perl avahi-utils ffmpeg \
+             libinline-python-perl libnet-ssleay-perl opus-tools $buildDeps && \
 	RELEASE=`curl -Lsf -o - "${BASESERVER_URL}?C=M;O=A" | grep DIR | sed -e '$!d' -e 's/.*href="//' -e 's/".*//'` && \
 	MEDIAFILE=`curl -Lsf -o - "${BASESERVER_URL}${RELEASE}" | grep _amd64.deb | sed -e '$!d' -e 's/.*href="//' -e 's/".*//'` && \
 	MEDIASERVER_URL="${BASESERVER_URL}${RELEASE}${MEDIAFILE}" && \
