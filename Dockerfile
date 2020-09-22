@@ -4,7 +4,8 @@ MAINTAINER Josh Lukens <jlukens@botch.com>
 ENV SQUEEZE_VOL /srv/squeezebox
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
-ENV BASESERVER_URL=http://downloads.slimdevices.com/nightly/8.0/lms/
+ENV BASESERVER_URL=http://downloads.slimdevices.com/nightly/
+ENV RELEASE=8.0
 ENV PERL_MM_USE_DEFAULT 1
 
 RUN buildDeps='build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev python-pip python-dev' && \
@@ -13,9 +14,8 @@ RUN buildDeps='build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev py
              libfont-freetype-perl libcrypt-openssl-rsa-perl libio-socket-inet6-perl libwww-perl \
              libcrypt-openssl-bignum-perl libcrypt-openssl-random-perl libcrypt-ssleay-perl avahi-utils ffmpeg \
              libinline-python-perl libnet-ssleay-perl opus-tools $buildDeps && \
-	RELEASE=`curl -Lsf -o - "${BASESERVER_URL}?C=M;O=A" | grep DIR | sed -e '$!d' -e 's/.*href="//' -e 's/".*//'` && \
-	MEDIAFILE=`curl -Lsf -o - "${BASESERVER_URL}${RELEASE}" | grep _amd64.deb | sed -e '$!d' -e 's/.*href="//' -e 's/".*//'` && \
-	MEDIASERVER_URL="${BASESERVER_URL}${RELEASE}${MEDIAFILE}" && \
+	MEDIAFILE=`curl -Lsf -o - "${BASESERVER_URL}?ver=${RELEASE}" | grep _amd64.deb | sed -e '$!d' -e 's/.*href="//' -e 's/".*//'` && \
+	MEDIASERVER_URL="${BASESERVER_URL}${MEDIAFILE}" && \
         echo Downloading ${MEDIASERVER_URL} && \
 	curl -Lsf -o /tmp/logitechmediaserver.deb $MEDIASERVER_URL && \
 	dpkg -i /tmp/logitechmediaserver.deb && \
