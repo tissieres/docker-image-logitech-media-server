@@ -1,11 +1,12 @@
 FROM ubuntu:xenial
 MAINTAINER Josh Lukens <jlukens@botch.com>
+LABEL org.opencontainers.image.source=https://github.com/apnar/docker-image-logitech-media-server
 
 ENV SQUEEZE_VOL /srv/squeezebox
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 ENV BASESERVER_URL=http://downloads.slimdevices.com/nightly/
-ENV RELEASE=8.0
+ENV RELEASE=8.3
 ENV PERL_MM_USE_DEFAULT 1
 
 RUN buildDeps='build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev python-pip python-dev' && \
@@ -21,9 +22,6 @@ RUN buildDeps='build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev py
 	dpkg -i /tmp/logitechmediaserver.deb && \
 	rm -rf /usr/share/squeezeboxserver/CPAN/Font && \
 	rm -f /tmp/logitechmediaserver.deb && \
-	pip install --upgrade pip && \
-        hash -r pip && \
-	pip install gmusicapi==12.1.0 && \
 	cpan App::cpanminus && \
 	cpanm --notest Inline && \
 	cpanm --notest Inline::Python && \

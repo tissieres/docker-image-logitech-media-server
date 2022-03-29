@@ -2,9 +2,7 @@
 
 This is a Docker image for running the Logitech Media Server package
 (aka SqueezeboxServer) based on the work done by larsks.  The
-main difference is the inclusion of dependancies needed to run the 
-Google Music plugin as well as a bump in ubuntu and Squeezebox Server
-versions.
+main difference a bump in ubuntu and Squeezebox Server versions.
 
 Run Directly:
 ```
@@ -19,15 +17,9 @@ docker run -d \
            -v <audio-dir>:/srv/music \
            apnar/logitech-media-server
 ```
-To enable Google Music plugin follow directions here:
-
-https://github.com/squeezebox-googlemusic/squeezebox-googlemusic#installation
-
-You can skip straight to step 7 of the installation instructions then read the section on usage.
-
 ## Note:
 
-Recently bumped LMS version to the 8.0 line. See the following from the LMS git page:
+Recently bumped LMS version to the 8.3 line. See the following from the LMS git page:
 https://github.com/Logitech/slimserver#sb-radio-and-logitech-media-server-8
 
 ## SB Radio and Logitech Media Server 8+
