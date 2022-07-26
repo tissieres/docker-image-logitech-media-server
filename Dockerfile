@@ -30,7 +30,8 @@ RUN buildDeps='build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev py
 	apt-get clean && \
         rm -rf /var/lib/apt/lists/* && \
         awk '/sub serverAddr {/{print $0 " \nif(defined $ENV{'\''PUBLIC_IP'\''}) { return $ENV{'\''PUBLIC_IP'\''} }"; next}1' /usr/share/perl5/Slim/Utils/Network.pm > /tmp/Network.pm && \
-	mv /tmp/Network.pm /usr/share/perl5/Slim/Utils/Network.pm
+	mv /tmp/Network.pm /usr/share/perl5/Slim/Utils/Network.pm && \
+  rm /usr/share/squeezeboxserver/Plugins && ln -s ${SQUEEZE_VOL}/Plugins /usr/share/squeezeboxserver
 
 VOLUME $SQUEEZE_VOL
 EXPOSE 3483 3483/udp 9000 9090
